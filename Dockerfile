@@ -1,4 +1,4 @@
-FROM maven:3.6.0-jdk-8 as build
+FROM maven:3.8.6-jdk-11 as build
 
 # Work around a bug in Java 1.8u181 / the Maven Surefire plugin.
 # See https://stackoverflow.com/questions/53010200 and
@@ -25,7 +25,7 @@ COPY context.xml /opt/tomcat/conf/
 # Install web app.
 RUN mvn sakai:deploy -Dmaven.tomcat.home=/opt/tomcat
 
-FROM openjdk:8
+FROM openjdk:11
 
 # Copy Sakai configuration.
 COPY sakai.properties /opt/tomcat/sakai/
