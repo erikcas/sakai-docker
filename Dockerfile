@@ -10,7 +10,7 @@ COPY sakai sakai
 WORKDIR sakai
 
 # nb. Skip tests to speed up the container build.
-RUN mvn install -Dmaven.test.skip=true -DskipTests
+RUN mvn clean install -Dmaven.test.skip=true -DskipTests
 
 # Download and install Apache Tomcat.
 RUN mkdir -p /opt/tomcat
@@ -21,7 +21,7 @@ RUN tar -C /opt/tomcat -xf /opt/tomcat/tomcat.tar.gz --strip-components 1
 # See https://confluence.sakaiproject.org/display/BOOT/Install+Tomcat+8
 ENV CATALINA_HOME /opt/tomcat
 COPY context.xml /opt/tomcat/conf/
-
+COPY server.xml /opt/tomcat/conf/
 # Install web app.
 RUN mvn sakai:deploy -Dmaven.tomcat.home=/opt/tomcat
 
