@@ -5,9 +5,12 @@ FROM maven:3.8.6-jdk-11 as build
 # https://issues.apache.org/jira/browse/SUREFIRE-1588.
 ENV JAVA_TOOL_OPTIONS "-Djdk.net.URLClassPath.disableClassPathURLCheck=true"
 
+ARG release=22.1
+
 # Build Sakai.
-COPY sakai sakai
+RUN git clone https://github.com/sakaiproject/sakai.git
 WORKDIR sakai
+RUN git checkout ${release}
 
 # nb. Skip tests to speed up the container build.
 RUN mvn clean install -Dmaven.test.skip=true -DskipTests
