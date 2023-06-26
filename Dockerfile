@@ -4,6 +4,12 @@ FROM maven:3.8.6-jdk-11 as build
 # See https://stackoverflow.com/questions/53010200 and
 # https://issues.apache.org/jira/browse/SUREFIRE-1588.
 ENV JAVA_TOOL_OPTIONS "-Djdk.net.URLClassPath.disableClassPathURLCheck=true"
+ENV JAVA_OPTS="$JAVA_OPTS -Duser.timezone=EU/Amsterdam"
+ENV JAVA_OPTS="$JAVA_OPTS -Duser.language=nl"
+ENV JAVA_OPTS="$JAVA_OPTS -Duser.region=NL"
+ENV JAVA_OPTS="$JAVA_OPTS -Dhttp.proxyHost=elearning.cas-online.nl"
+ENV JAVA_OPTS="$JAVA_OPTS -Dhttp.proxyPort=443"
+ENV JAVA_OPTS="$JAVA_OPTS -Dhttp.scheme=https"
 
 ARG release=22.3
 
@@ -24,7 +30,7 @@ RUN tar -C /opt/tomcat -xf /opt/tomcat/tomcat.tar.gz --strip-components 1
 # See https://confluence.sakaiproject.org/display/BOOT/Install+Tomcat+8
 ENV CATALINA_HOME /opt/tomcat
 COPY context.xml /opt/tomcat/conf/
-COPY server.xml /opt/tomcat/conf/
+
 # Install web app.
 RUN mvn sakai:deploy -Dmaven.tomcat.home=/opt/tomcat
 
