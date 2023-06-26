@@ -17,7 +17,7 @@ RUN mvn clean install -Dmaven.test.skip=true -DskipTests
 
 # Download and install Apache Tomcat.
 RUN mkdir -p /opt/tomcat
-RUN curl "https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.68/bin/apache-tomcat-9.0.68.tar.gz" > /opt/tomcat/tomcat.tar.gz
+RUN curl "https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.76/bin/apache-tomcat-9.0.76.tar.gz" > /opt/tomcat/tomcat.tar.gz
 RUN tar -C /opt/tomcat -xf /opt/tomcat/tomcat.tar.gz --strip-components 1
 
 # Configure Tomcat.
