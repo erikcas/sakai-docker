@@ -5,7 +5,7 @@ FROM maven:3.8.6-jdk-11 as build
 # https://issues.apache.org/jira/browse/SUREFIRE-1588.
 ENV JAVA_TOOL_OPTIONS "-Djdk.net.URLClassPath.disableClassPathURLCheck=true"
 
-ARG release=22.1
+ARG release=22.3
 
 # Build Sakai.
 RUN git clone https://github.com/sakaiproject/sakai.git
